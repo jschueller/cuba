@@ -27,7 +27,9 @@
 #include <math.h>
 #include <float.h>
 #include <limits.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <assert.h>
 #include <fcntl.h>
 #include <setjmp.h>
@@ -58,6 +60,25 @@
 extern "C"
 #endif
 void *alloca (size_t);
+#endif
+
+#ifdef _MSC_VER
+#include <io.h>
+#define open _open
+#define close _close
+#define ssize_t ptrdiff_t
+
+static int mkstemp(char * tmplate)
+{
+  int fd = -1;
+  int err = -1;
+  char buf[_MAX_PATH];
+  strncpy(buf, tmplate, _MAX_PATH);
+  err = _mktemp_s(buf, _MAX_PATH);
+  if (err != 0)
+    fd = open (buf, O_RDWR | O_CREAT | O_EXCL, _S_IREAD | _S_IWRITE);
+  return fd;
+}
 #endif
 
 #ifndef NDIM
@@ -175,7 +196,7 @@ enum { uninitialized = 0x61627563 };
 #else
 #define Sized(type, var, size) type *var = alloca(size)
 #define Vector(type, var, n1) type *var = alloca((n1)*sizeof(type))
-#define Array(type, var, n1, n2) type (*var)[n2] = alloca((n1)*(n2)*sizeof(type))
+#define Array(type, var, n1, n2) Vector(type *, var, n1); Vector(type, __flat, (n1)*(n2)); int __ii; for (__ii = 0;__ii < (n1); ++__ii) var[__ii] = &(__flat[__ii * (n2)]);
 #endif
 
 #define FORK_ONLY(...)
