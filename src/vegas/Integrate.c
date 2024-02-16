@@ -83,7 +83,8 @@ static int Integrate(This *t, real *integral, real *error, real *prob)
     number nsamples = state->nsamples;
     creal jacobian = 1./nsamples;
 
-    FClear(margsum);
+    for(comp = 0 ; comp < NCOMP; ++ comp)
+      memset(margsum[comp], 0, NDIM * sizeof(Grid));
 
     for( ; nsamples > 0; nsamples -= t->nbatch ) {
       cnumber n = IMin(t->nbatch, nsamples);
