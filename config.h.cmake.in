@@ -1,0 +1,16 @@
+/* config.h.  Generated from config.h.cmake.in by cmake.  */
+
+/* Define to 1 if you have the `fork' function. */
+#cmakedefine HAVE_FORK
+
+/* Define to 1 if you have the `powl' function. */
+#cmakedefine HAVE_POWL
+
+/* Define to 1 if the type `long double' works and has more range or precision than `double'. */
+#cmakedefine HAVE_LONG_DOUBLE
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+#cmakedefine HAVE_ALLOCA_H
+
+/* Define to 1 if you have the `shmget' function. */
+#cmakedefine HAVE_SHMGET
