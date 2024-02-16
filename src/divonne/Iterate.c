@@ -53,9 +53,11 @@ FORK_ONLY(more:)
     maxsplit -= NegQ(parent->depth);
     if( parent->depth < 0 ) {
       count xreg;
-      struct {
+      typedef struct {
         count from, to;
-      } todo[maxsplit], *tdmax = todo, *td;
+      } Range;
+      Vector(Range, todo, maxsplit);
+      Range *tdmax = todo, *td;
       count nsplit = 0;
       real norm;
 
