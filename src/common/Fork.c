@@ -155,10 +155,7 @@ Extern void SUFFIX(cubawait)(Spin **pspin)
 
 Extern void SUFFIX(cubafork)(Spin **pspin) {}
 
-Extern void SUFFIX(cubawait)(Spin **pspin)
-{
-  MasterExit();
-}
+Extern void SUFFIX(cubawait)(Spin **pspin) {}
 
 #endif
 
