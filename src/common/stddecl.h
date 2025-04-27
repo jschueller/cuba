@@ -44,6 +44,7 @@
 #include <sys/shm.h>
 #endif
 #endif
+#include <stdbool.h>
 
 #ifdef HAVE_ALLOCA_H
 #include <alloca.h>
@@ -352,7 +353,6 @@ if( fail == 0 && (t)->statefile && KEEPFILE == 0 ) unlink((t)->statefile)
 #define Extern extern "C"
 #else
 #define Extern extern
-typedef enum { false, true } bool;
 #endif
 
 typedef const char cchar;
